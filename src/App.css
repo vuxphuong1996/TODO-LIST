@@ -1,0 +1,33 @@
+.App {
+    background: #ebedf0;
+}
+
+.col {
+    margin-right: 10px;
+}
+
+.listItem {
+    border: 1px solid #4444;
+    background: #f4f5f9;
+    margin-bottom: 10px;
+    border-left: 3px solid #1ca1c1;
+    padding: 10px 0px;
+}
+
+.listItem-top {
+    margin-bottom: 10px;
+    padding: 0px 10px;
+}
+
+.listItem-bottom .tag {
+    background: rgba(228, 230, 240, 0.8);
+    padding: 0 8px;
+    border-radius: 12px;
+    margin: 0 8px 2px 0;
+}
+
+.imageUser {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
