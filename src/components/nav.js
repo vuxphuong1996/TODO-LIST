@@ -1,24 +1,41 @@
 import React from "react";
-import { Nav, NavDropdown } from "react-bootstrap";
+import { Dropdown } from "semantic-ui-react";
 
-export const NavDropdownTest = () => {
-    const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
+const friendOptions = [
+    {
+        key: "Jenny Hess",
+        text: "Jenny Hess",
+        value: "Jenny Hess",
+        image: { avatar: true, src: "/images/user.png" }
+    },
+    {
+        key: "Elliot Fu",
+        text: "Elliot Fu",
+        value: "Elliot Fu",
+        image: { avatar: true, src: "/images/user.png" }
+    },
+    {
+        key: "Stevie Feliciano",
+        text: "Stevie Feliciano",
+        value: "Stevie Feliciano",
+        image: { avatar: true, src: "images/user.png" }
+    },
+    {
+        key: "Christian",
+        text: "Christian",
+        value: "Christian",
+        image: { avatar: true, src: "images/user.png" }
+    }
+];
 
-    return (
-        <Nav variant="pills" activeKey="1" onSelect={handleSelect}>
-            <NavDropdown title="Dropdown" id="nav-dropdown">
-                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.2">
-                    Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.3">
-                    Something else here
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item eventKey="4.4">
-                    Separated link
-                </NavDropdown.Item>
-            </NavDropdown>
-        </Nav>
-    );
-};
+const DropdownTest = () => (
+    <span>
+        <Dropdown
+            inline
+            options={friendOptions}
+            defaultValue={friendOptions[0].value}
+        />
+    </span>
+);
+
+export default DropdownTest;

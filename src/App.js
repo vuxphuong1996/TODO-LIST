@@ -3,7 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { CustomToggle } from "./components/dropdown";
 import { Dropdown } from "react-bootstrap";
 import { ModalTest } from "./components/modal";
-import { NavDropdownTest } from "./components/nav";
+import DropdownTest from "./components/nav";
+import { Thunghiem } from "./components/thunghiem";
 
 import "./App.css";
 
@@ -28,7 +29,7 @@ function App() {
                                             </Col>
 
                                             <Col>
-                                                <NavDropdownTest />
+                                                <DropdownTest />
                                             </Col>
                                         </Row>
                                     </Col>
@@ -139,6 +140,7 @@ function App() {
                                 </Row>
                             </div>
                         </div>
+                        <Thunghiem />
                     </Col>
                     {/* END BACKLOG */}
 
