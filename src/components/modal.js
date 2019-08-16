@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, ButtonToolbar, Button, Form, Col, Row } from "react-bootstrap";
 import { Dropdown } from "semantic-ui-react";
-import Files from "react-files";
 import { Thunghiem } from "./thunghiem";
 
 const stateAssign = [
@@ -174,13 +173,13 @@ export class MyVerticallyCenteredModal extends React.Component {
                             </Row>
                         </Form.Group>
                         <div>
-                        <input
-                            type="file"
-                            id="avatar"
-                            name="avatar"
-                            accept="image/png, image/jpeg"
-                        />
-                    </div>
+                            <input
+                                type="file"
+                                id="avatar"
+                                name="avatar"
+                                accept="image/png, image/jpeg"
+                            />
+                        </div>
 
                         {/* {this.state.files.length > 0 ? (
                             <div className="files-list">

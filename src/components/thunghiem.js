@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Files from "react-files";
 
 export class Thunghiem extends React.Component {

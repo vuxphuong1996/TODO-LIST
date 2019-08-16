@@ -5,6 +5,7 @@ import { Dropdown } from "react-bootstrap";
 import { ModalTest } from "./components/modal";
 import DropdownTest from "./components/nav";
 import { Thunghiem } from "./components/thunghiem";
+import { ModalButton } from "./components/ModalButton";
 
 import "./App.css";
 
@@ -13,7 +14,6 @@ function App() {
         <div className="App">
             <Container>
                 <Row>
-                    <ModalTest />
                     {/* BACKLOG */}
                     <Col>
                         <div className="backlog">
@@ -53,7 +53,7 @@ function App() {
 
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item eventKey="1">
-                                                            <ModalTest name="Edit" />
+                                                            <ModalButton />
                                                         </Dropdown.Item>
                                                         <Dropdown.Item eventKey="2">
                                                             <ModalTest name="Copy" />
