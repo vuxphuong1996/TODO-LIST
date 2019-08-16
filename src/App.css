@@ -131,3 +131,14 @@
 .removeUpload::hover span {
     color: red;
 } */
+
+
+.listItem {
+	background-color: #fff6b2 !important;
+}
+
+.selected {
+  background-color: #f9c7c8 !important;
+  border: solid red 1px !important;
+  z-index: 1 !important;
+}
