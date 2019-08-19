@@ -13,7 +13,10 @@
     "react-dom": "^16.9.0",
     "react-files": "^2.4.8",
     "react-scripts": "3.1.1",
+<<<<<<< HEAD
     "react-select": "^3.0.4",
+=======
+>>>>>>> d6ecf1c51417f8753ef38b69631c3ee9e4fd8b5a
     "semantic-ui-react": "^0.87.3",
     "sortablejs": "^1.10.0-rc3"
   },
