@@ -31,6 +31,7 @@ const friendOptions = [
 const DropdownTest = () => (
     <span>
         <Dropdown
+            className="positionDrop"
             inline
             options={friendOptions}
             defaultValue={friendOptions[0].value}

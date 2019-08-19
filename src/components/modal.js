@@ -1,7 +1,10 @@
 import React from "react";
 import { Modal, ButtonToolbar, Button, Form, Col, Row } from "react-bootstrap";
 import { Dropdown } from "semantic-ui-react";
-import { Thunghiem } from "./thunghiem";
+import Files from "react-files";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { MultiSelect } from "./multiselect";
 
 const stateAssign = [
     {
@@ -90,8 +93,31 @@ export class MyVerticallyCenteredModal extends React.Component {
         console.log("error code " + error.code + ": " + error.message);
     };
 
+    filesRemoveOne = (file) => {
+        this.refs.files.removeFile(file);
+    };
+
     filesRemoveAll = () => {
         this.refs.files.removeFiles();
+    };
+
+    submitItem = (e) => {
+        e.preventDefault();
+        // const userInfo = {
+        //     title: ,
+        //     tags: ,
+        //     assignTo: ,
+        //     color: ,
+        //     status: ,
+        //     file:
+        // }
+        console.log("dnvjdnvj", this.assignto.state.value);
+        // console.log(this.tags);
+        console.log(this.color);
+        console.log(this.status);
+        console.log(this.title.value);
+        console.log(this.state.files);
+        this.props.saveItem();
     };
 
     render() {
@@ -108,15 +134,19 @@ export class MyVerticallyCenteredModal extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={this.submitItem}>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control
-                                type="email"
-                                placeholder="Enter email"
+                                type="text"
+                                placeholder="Enter title"
+                                ref={(node) => (this.title = node)}
                             />
                         </Form.Group>
-
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Tags</Form.Label>
+                            <MultiSelect />
+                        </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Row>
                                 <Col md={4}>
@@ -129,6 +159,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         selection
                                         options={stateAssign}
                                         defaultValue={stateAssign[0].value}
+                                        ref={(node) => (this.assignto = node)}
                                     />
                                 </Col>
 
@@ -142,6 +173,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         selection
                                         options={stateColors}
                                         defaultValue={stateColors[0].value}
+                                        ref={(node) => (this.color = node)}
                                     />
                                 </Col>
 
@@ -155,6 +187,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         selection
                                         options={stateStatus}
                                         defaultValue={stateStatus[0].value}
+                                        ref={(node) => (this.status = node)}
                                     />
                                 </Col>
                             </Row>
@@ -167,21 +200,31 @@ export class MyVerticallyCenteredModal extends React.Component {
                                 </Col>
                                 <Col>
                                     <Form.Label>
-                                        <Thunghiem />
+                                        <Files
+                                            ref="files"
+                                            className="files-dropzone"
+                                            onChange={this.onFilesChange}
+                                            onError={this.onFilesError}
+                                            accepts={[
+                                                "image/png",
+                                                ".pdf",
+                                                "audio/*"
+                                            ]}
+                                            multiple
+                                            maxFiles={3}
+                                            maxFileSize={10000000}
+                                            minFileSize={0}
+                                            clickable
+                                        >
+                                            <FontAwesomeIcon icon={faUpload} />
+                                            &nbsp;Upload
+                                        </Files>
                                     </Form.Label>
                                 </Col>
                             </Row>
                         </Form.Group>
-                        <div>
-                            <input
-                                type="file"
-                                id="avatar"
-                                name="avatar"
-                                accept="image/png, image/jpeg"
-                            />
-                        </div>
 
-                        {/* {this.state.files.length > 0 ? (
+                        {this.state.files.length > 0 ? (
                             <div className="files-list">
                                 <ul>
                                     {this.state.files.map((file) => (
@@ -195,6 +238,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                                     <img
                                                         className="files-list-item-preview-image"
                                                         src={file.preview.url}
+                                                        alt=""
                                                     />
                                                 ) : (
                                                     <div className="files-list-item-preview-extension">
@@ -222,13 +266,17 @@ export class MyVerticallyCenteredModal extends React.Component {
                                     ))}
                                 </ul>
                             </div>
-                        ) : null} */}
+                        ) : null}
 
                         <Button variant="primary" type="submit">
                             REMOVE
                         </Button>
 
-                        <Button variant="danger" type="submit">
+                        <Button
+                            variant="danger"
+                            type="submit"
+                            className="buttonSave"
+                        >
                             SAVE
                         </Button>
                     </Form>
@@ -238,7 +286,7 @@ export class MyVerticallyCenteredModal extends React.Component {
     }
 }
 
-export const ModalTest = ({ name }) => {
+export const ModalTest = ({ name, saveItem }) => {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
@@ -250,6 +298,7 @@ export const ModalTest = ({ name }) => {
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                saveItem={saveItem}
             />
         </ButtonToolbar>
     );
