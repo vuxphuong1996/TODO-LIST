@@ -130,12 +130,21 @@ export class MyVerticallyCenteredModal extends React.Component {
             },
             files: this.state.files
         };
-        // console.log(userInfo);
         this.props.saveItem(userInfo);
     };
 
+    handldeChange = () => {};
+
     render() {
-        const { id, title, status, tags, color, assign, files } = this.props.item;
+        const {
+            id,
+            title,
+            status,
+            tags,
+            color,
+            assign,
+            files
+        } = this.props.item;
         return (
             <Modal
                 {...this.props}
@@ -156,7 +165,8 @@ export class MyVerticallyCenteredModal extends React.Component {
                                 type="text"
                                 placeholder="Enter title"
                                 ref={(node) => (this.title = node)}
-                                value={title}
+                                defaultValue={title}
+                                // onChange={this.handldeChange()}
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -294,13 +304,14 @@ export class MyVerticallyCenteredModal extends React.Component {
                             type="button"
                             onClick={() => this.props.deleteItem(id)}
                         >
-                            REMOVE
+                            REMOVE {id}
                         </Button>
 
                         <Button
                             variant="danger"
                             type="submit"
                             className="buttonSave"
+                            onClick={this.props.onHide}
                         >
                             SAVE
                         </Button>
@@ -311,22 +322,19 @@ export class MyVerticallyCenteredModal extends React.Component {
     }
 }
 
-export const ModalEdit = ({
-    item,
-    saveItem,
-    toggleModal,
-    modalShow,
-    deleteItem
-}) => {
+export const ModalEdit = ({ item, saveItem, deleteItem }) => {
+    const [modalShow, setModalShow] = React.useState(false);
+    const handleClose = () => setModalShow(false);
+    const handleShow = () => setModalShow(true);
     return (
         <ButtonToolbar>
-            <p variant="primary" onClick={() => toggleModal()}>
+            <p variant="primary" onClick={handleShow}>
                 Edit
             </p>
 
             <MyVerticallyCenteredModal
                 show={modalShow}
-                onHide={() => toggleModal()}
+                onHide={handleClose}
                 saveItem={saveItem}
                 item={item}
                 deleteItem={deleteItem}
@@ -334,25 +342,6 @@ export const ModalEdit = ({
         </ButtonToolbar>
     );
 };
-
-// export const ModalCopy = ({ name, saveItem }) => {
-//     const [modalShow, setModalShow] = React.useState(false);
-
-//     return (
-//         <ButtonToolbar>
-//             <p variant="primary" onClick={() => setModalShow(true)}>
-//                 Copy
-//             </p>
-
-//             <MyVerticallyCenteredModal
-//                 show={modalShow}
-//                 onHide={() => setModalShow(false)}
-//                 saveItem={saveItem}
-
-//             />
-//         </ButtonToolbar>
-//     );
-// };
 
 // export const ModalRemove = ({ toggleModal, modalShow, deleteItem }) => {
 //     return (

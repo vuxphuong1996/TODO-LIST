@@ -10,8 +10,7 @@ Sortable.mount(new MultiDrag());
 
 class App extends React.Component {
     state = {
-        data: data,
-        modalShow: false
+        data: data
     };
 
     componentDidMount() {
@@ -31,7 +30,7 @@ class App extends React.Component {
         });
     };
 
-    addItem = (id) => {
+    AddItem = (id) => {
         const { data } = this.state;
         data.forEach((item) => {
             if (item.id === id) {
@@ -85,8 +84,7 @@ class App extends React.Component {
             };
         });
         this.setState({
-            data: dataItem,
-            modalShow: false
+            data: dataItem
         });
     };
 
@@ -101,19 +99,13 @@ class App extends React.Component {
             };
         });
         this.setState({
-            data: dataItem,
-            modalShow: false
+            data: dataItem
         });
-    };
-
-    toggleModal = () => {
-        this.setState((prevState) => ({
-            modalShow: !prevState.modalShow
-        }));
     };
 
     render() {
         const { data } = this.state;
+        console.log(data);
         return (
             <div className="App">
                 <Container>
@@ -122,10 +114,8 @@ class App extends React.Component {
                             <RowItem
                                 {...item}
                                 key={item.id}
-                                addItem={this.addItem}
+                                AddItem={this.AddItem}
                                 saveItem={this.saveItem}
-                                toggleModal={this.toggleModal}
-                                modalShow={this.state.modalShow}
                                 deleteItem={this.deleteItem}
                             />
                         ))}

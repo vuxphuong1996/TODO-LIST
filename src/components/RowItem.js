@@ -24,17 +24,15 @@ export const RowItem = ({
     title,
     idName,
     dataBacklog,
-    addItem,
+    AddItem,
     saveItem,
-    toggleModal,
-    modalShow,
     deleteItem
 }) => {
     return (
         <Col>
             <div className="backlog">
                 <div className="backlog-button">
-                    <span onClick={() => addItem(id)}>
+                    <span onClick={() => AddItem(id)}>
                         <FontAwesomeIcon icon={faPlusCircle} />
                     </span>{" "}
                     {title}
@@ -79,14 +77,12 @@ export const RowItem = ({
                                             </Dropdown.Toggle>
 
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="#/action-0">
+                                                <Dropdown.Item
+                                                    href={`#/action-${item.id}`}
+                                                >
                                                     <ModalEdit
                                                         item={item}
                                                         saveItem={saveItem}
-                                                        toggleModal={
-                                                            toggleModal
-                                                        }
-                                                        modalShow={modalShow}
                                                         deleteItem={deleteItem}
                                                     />
                                                 </Dropdown.Item>
