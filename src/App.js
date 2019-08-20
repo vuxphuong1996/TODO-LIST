@@ -10,8 +10,8 @@ class App extends React.Component {
         data: data,
         dataBacklog: dataBacklogV2
     };
-   
-    AddItem = (id) => {
+
+    addItem = (id) => {
         const { data } = this.state;
         data.forEach((item) => {
             if (item.id === id) {
@@ -44,26 +44,23 @@ class App extends React.Component {
     };
 
     saveItem = (userInfo) => {
-        const { data } = this.state;
-        const dataItem = data.map((dtItem) => {
-            return {
-                ...dtItem,
-                dataBacklog: dtItem.dataBacklog.map((dtItemChild) => {
-                    if (dtItemChild.id === userInfo.id) {
-                        return {
-                            ...dtItemChild,
-                            title: userInfo.title,
-                            tags: userInfo.tags,
-                            assign: userInfo.assign,
-                            color: userInfo.color,
-                            status: userInfo.status,
-                            files: userInfo.files
-                        };
-                    }
-                    return dtItemChild;
-                })
-            };
+        console.log(userInfo);
+        const { dataBacklog } = this.state;
+        const dataItem = dataBacklog.map((dtItem) => {
+            if (dtItem.id === userInfo.id) {
+                return {
+                    ...dtItem,
+                    title: userInfo.title,
+                    tags: userInfo.tags,
+                    assign: userInfo.assign,
+                    color: userInfo.color,
+                    status: userInfo.status,
+                    files: userInfo.files
+                };
+            }
+            return dtItem;
         });
+        console.log(dataItem);
         this.setState({
             data: dataItem
         });
@@ -72,34 +69,35 @@ class App extends React.Component {
     deleteItem = (id) => {
         const dataAfterDelete = this.state.dataBacklog.filter((dtItemChild) => {
             return dtItemChild.id !== id;
-        })
-        this.setState({dataBacklog: dataAfterDelete});
+        });
+        this.setState({ dataBacklog: dataAfterDelete });
     };
 
     mappingItem = () => {
         const { data } = this.state;
+        console.log(data);
         return data.map((item) => {
-            return <RowItem
-                        // {...item}
-                        id={item.id}
-                        title={item.title}
-                        dataBacklog={item.dataBacklog}
-                        dataNoName={this.state.dataBacklog}
-                        key={item.id}
-                        AddItem={this.AddItem}
-                        saveItem={this.saveItem}
-                        deleteItem={this.deleteItem}
-                    />
-        })
-    }
+            return (
+                <RowItem
+                    // {...item}
+                    id={item.id}
+                    title={item.title}
+                    dataBacklog={item.dataBacklog}
+                    dataNoName={this.state.dataBacklog}
+                    key={item.id}
+                    addItem={this.addItem}
+                    saveItem={this.saveItem}
+                    deleteItem={this.deleteItem}
+                />
+            );
+        });
+    };
 
     render() {
         return (
             <div className="App">
                 <Container>
-                    <Row>
-                        {this.mappingItem()}
-                    </Row>
+                    <Row>{this.mappingItem()}</Row>
                 </Container>
             </div>
         );

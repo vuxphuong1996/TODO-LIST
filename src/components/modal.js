@@ -80,7 +80,8 @@ export class MyVerticallyCenteredModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            files: []
+            files: [],
+            selectedOption: ""
         };
     }
 
@@ -112,7 +113,10 @@ export class MyVerticallyCenteredModal extends React.Component {
         const userInfo = {
             id: this.props.item.id,
             title: this.title.value,
-            tags: { value: this.tag.state.value, label: this.tag.state.value },
+            tags:
+                this.state.selectedOption.length > 0
+                    ? this.state.selectedOption
+                    : this.props.item.tags,
             assign: {
                 key: this.assignto.state.value,
                 text: this.assignto.state.value,
@@ -133,7 +137,10 @@ export class MyVerticallyCenteredModal extends React.Component {
         this.props.saveItem(userInfo);
     };
 
-    handldeChange = () => {};
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+    };
 
     render() {
         const {
@@ -145,8 +152,7 @@ export class MyVerticallyCenteredModal extends React.Component {
             assign,
             files
         } = this.props.item;
-        const {onHide, show} = this.props
-        console.log(this.props)
+        const { onHide, show } = this.props;
         return (
             <Modal
                 onHide={onHide}
@@ -177,8 +183,8 @@ export class MyVerticallyCenteredModal extends React.Component {
                             <Select
                                 options={options}
                                 isMulti
-                                ref={(node) => (this.tag = node)}
-                                defaultValue={tags.value}
+                                onChange={this.handleChange}
+                                defaultValue={tags}
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -345,4 +351,3 @@ export const ModalEdit = ({ item, saveItem, deleteItem }) => {
         </ButtonToolbar>
     );
 };
-

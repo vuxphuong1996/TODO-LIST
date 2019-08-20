@@ -3,8 +3,8 @@ import uuidv1 from "uuid/v1";
 export const dataBacklogV2 = [
     {
         id: 1,
-        title: "111",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -24,8 +24,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 2,
-        title: "2222222",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -45,8 +45,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 3,
-        title: "333333",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -66,8 +66,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 4,
-        title: "444444",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -87,8 +87,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 5,
-        title: "5555555",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -108,8 +108,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 6,
-        title: "6666666",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -129,8 +129,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 7,
-        title: "7777777",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -150,8 +150,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 8,
-        title: "88888888",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -171,8 +171,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 9,
-        title: "99999999",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -192,8 +192,8 @@ export const dataBacklogV2 = [
     },
     {
         id: 0,
-        title: "0000000000",
-        tags: { value: "chocolate", label: "Chocolate" },
+        title: "Webix Je t 2.0",
+        tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
             key: "Jenny Hess",
             text: "Jenny Hess",
@@ -210,8 +210,8 @@ export const dataBacklogV2 = [
             value: "New"
         },
         files: []
-    },
-]
+    }
+];
 
 export const data = [
     {

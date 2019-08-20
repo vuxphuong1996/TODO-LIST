@@ -6,14 +6,14 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
 import { ModalEdit } from "./modal";
 import DropdownTest from "./nav";
-import Sortable from 'react-sortablejs';
+import Sortable from "react-sortablejs";
 // import { dataBacklogV2 } from "./../const/index";
-import uniqueId from 'lodash/uniqueId';
+import uniqueId from "lodash/uniqueId";
 
 class RowItem extends Component {
     state = {
         idCard: this.props.dataBacklog
-    }
+    };
 
     styleDiv = (item) => {
         if (item.value === "Low") {
@@ -28,35 +28,39 @@ class RowItem extends Component {
     };
 
     mappingData = () => {
-        const {saveItem, deleteItem } = this.props
-        const { idCard } = this.state
-        return this.props.dataNoName.map((item) => {
-            return idCard.map((val) => {                
-                if (item.id === val){
-                    return (<Row
-                                className="listItem"
-                                data-id={item.id}
-                                key={uniqueId()}
-                                style={this.styleDiv(item.color)}
-                            >
+        const { saveItem, deleteItem } = this.props;
+        const { idCard } = this.state;
+        console.log(this.props.dataBacklog);
+        console.log(this.props.id);
+
+        return this.props.dataBacklog.map((val) => {
+            return this.props.dataNoName.map((item) => {
+                if (item.id === val) {
+                    return (
+                        <Row
+                            className="listItem"
+                            data-id={item.id}
+                            key={uniqueId()}
+                            style={this.styleDiv(item.color)}
+                        >
                             <Col md={12} className="listItem-top">
                                 <Row>
                                     <Col>
                                         <h6>{item.title}</h6>
                                     </Col>
-                    
+
                                     <Col>
                                         <DropdownTest {...item} />
                                     </Col>
                                 </Row>
                             </Col>
-            
+
                             <Col md={12} className="listItem-bottom">
                                 <Row>
                                     <Col>
                                         <span className="tag">Hards</span>
                                     </Col>
-                    
+
                                     <Col>
                                         <Dropdown className="positionDrop">
                                             <Dropdown.Toggle
@@ -69,7 +73,7 @@ class RowItem extends Component {
                                                     />
                                                 </span>
                                             </Dropdown.Toggle>
-                    
+
                                             <Dropdown.Menu>
                                                 <Dropdown.Item
                                                     href={`#/action-${item.id}`}
@@ -85,48 +89,48 @@ class RowItem extends Component {
                                     </Col>
                                 </Row>
                             </Col>
-                        </Row>)
-                }else{return null;}
-            })
-        })
-        
-    }
+                        </Row>
+                    );
+                } else {
+                    return null;
+                }
+            });
+        });
+    };
 
     render() {
-        const { id, title, AddItem } = this.props
+        const { id, title, addItem } = this.props;
         return (
-            <div>
-                <Col>
-                    <div>
-                        <div className="backlog-button">
-                            <span onClick={() => AddItem(id)}>
-                                <FontAwesomeIcon icon={faPlusCircle} />
-                            </span>
-                            {title}
-                        </div>
-
-                        <div className="backlog-list" >
-                            <Sortable
-                                    options={{
-                                        animation: 150,
-                                        group: {
-                                            name: 'shared',
-                                            pull: true,
-                                            put: true
-                                        }
-                                    }}
-                                    className="block-list"
-                                    onChange={(items) => {
-                                        console.log('items', items.map(Number))
-                                        this.setState({ idCard: items.map(Number) });
-                                    }}
-                                >
-                                    {this.mappingData()}
-                            </Sortable>
-                        </div>
+            <Col>
+                <div>
+                    <div className="backlog-button">
+                        <span onClick={() => addItem(id)}>
+                            <FontAwesomeIcon icon={faPlusCircle} />
+                        </span>
+                        {title}
                     </div>
-                </Col>
-            </div>
+
+                    <div className="backlog-list">
+                        <Sortable
+                            options={{
+                                animation: 150,
+                                group: {
+                                    name: "shared",
+                                    pull: true,
+                                    put: true
+                                }
+                            }}
+                            className="block-list"
+                            onChange={(items) => {
+                                console.log("items", items.map(Number));
+                                this.setState({ idCard: items.map(Number) });
+                            }}
+                        >
+                            {this.mappingData()}
+                        </Sortable>
+                    </div>
+                </div>
+            </Col>
         );
     }
 }
