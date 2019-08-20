@@ -10,7 +10,6 @@
     border: 1px solid #4444;
     background: #f4f5f9;
     margin-bottom: 10px;
-    border-left: 3px solid #1ca1c1;
     padding: 10px 0px;
 }
 
@@ -131,7 +130,6 @@
 .removeUpload::hover span {
     color: red;
 } */
-<<<<<<< HEAD
 .files-dropzone-list {
     display: table-cell;
     vertical-align: middle;
@@ -268,16 +266,3 @@
     border: solid red 1px !important;
     z-index: 1 !important;
 }
-=======
-
-
-.listItem {
-	background-color: #fff6b2 !important;
-}
-
-.selected {
-  background-color: #f9c7c8 !important;
-  border: solid red 1px !important;
-  z-index: 1 !important;
-}
->>>>>>> d6ecf1c51417f8753ef38b69631c3ee9e4fd8b5a

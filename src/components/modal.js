@@ -4,7 +4,13 @@ import { Dropdown } from "semantic-ui-react";
 import Files from "react-files";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import { MultiSelect } from "./multiselect";
+import Select from "react-select";
+
+const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" }
+];
 
 const stateAssign = [
     {
@@ -103,24 +109,33 @@ export class MyVerticallyCenteredModal extends React.Component {
 
     submitItem = (e) => {
         e.preventDefault();
-        // const userInfo = {
-        //     title: ,
-        //     tags: ,
-        //     assignTo: ,
-        //     color: ,
-        //     status: ,
-        //     file:
-        // }
-        console.log("dnvjdnvj", this.assignto.state.value);
-        // console.log(this.tags);
-        console.log(this.color);
-        console.log(this.status);
-        console.log(this.title.value);
-        console.log(this.state.files);
-        this.props.saveItem();
+        const userInfo = {
+            id: this.props.item.id,
+            title: this.title.value,
+            tags: { value: this.tag.state.value, label: this.tag.state.value },
+            assign: {
+                key: this.assignto.state.value,
+                text: this.assignto.state.value,
+                value: this.assignto.state.value
+            },
+            color: {
+                key: this.color.state.value,
+                text: this.color.state.value,
+                value: this.color.state.value
+            },
+            status: {
+                key: this.status.state.value,
+                text: this.status.state.value,
+                value: this.status.state.value
+            },
+            files: this.state.files
+        };
+        // console.log(userInfo);
+        this.props.saveItem(userInfo);
     };
 
     render() {
+        const { id, title, status, tags, color, assign, files } = this.props.item;
         return (
             <Modal
                 {...this.props}
@@ -141,11 +156,17 @@ export class MyVerticallyCenteredModal extends React.Component {
                                 type="text"
                                 placeholder="Enter title"
                                 ref={(node) => (this.title = node)}
+                                value={title}
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Tags</Form.Label>
-                            <MultiSelect />
+                            <Select
+                                options={options}
+                                isMulti
+                                ref={(node) => (this.tag = node)}
+                                defaultValue={tags.value}
+                            />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Row>
@@ -158,7 +179,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         search
                                         selection
                                         options={stateAssign}
-                                        defaultValue={stateAssign[0].value}
+                                        defaultValue={assign.value}
                                         ref={(node) => (this.assignto = node)}
                                     />
                                 </Col>
@@ -172,7 +193,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         search
                                         selection
                                         options={stateColors}
-                                        defaultValue={stateColors[0].value}
+                                        defaultValue={color.value}
                                         ref={(node) => (this.color = node)}
                                     />
                                 </Col>
@@ -186,7 +207,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         search
                                         selection
                                         options={stateStatus}
-                                        defaultValue={stateStatus[0].value}
+                                        defaultValue={status.value}
                                         ref={(node) => (this.status = node)}
                                     />
                                 </Col>
@@ -224,7 +245,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                             </Row>
                         </Form.Group>
 
-                        {this.state.files.length > 0 ? (
+                        {(this.state.files.length || files.length) > 0 ? (
                             <div className="files-list">
                                 <ul>
                                     {this.state.files.map((file) => (
@@ -268,7 +289,11 @@ export class MyVerticallyCenteredModal extends React.Component {
                             </div>
                         ) : null}
 
-                        <Button variant="primary" type="submit">
+                        <Button
+                            variant="primary"
+                            type="button"
+                            onClick={() => this.props.deleteItem(id)}
+                        >
                             REMOVE
                         </Button>
 
@@ -286,20 +311,61 @@ export class MyVerticallyCenteredModal extends React.Component {
     }
 }
 
-export const ModalTest = ({ name, saveItem }) => {
-    const [modalShow, setModalShow] = React.useState(false);
-
+export const ModalEdit = ({
+    item,
+    saveItem,
+    toggleModal,
+    modalShow,
+    deleteItem
+}) => {
     return (
         <ButtonToolbar>
-            <p variant="primary" onClick={() => setModalShow(true)}>
-                {name}
+            <p variant="primary" onClick={() => toggleModal()}>
+                Edit
             </p>
 
             <MyVerticallyCenteredModal
                 show={modalShow}
-                onHide={() => setModalShow(false)}
+                onHide={() => toggleModal()}
                 saveItem={saveItem}
+                item={item}
+                deleteItem={deleteItem}
             />
         </ButtonToolbar>
     );
 };
+
+// export const ModalCopy = ({ name, saveItem }) => {
+//     const [modalShow, setModalShow] = React.useState(false);
+
+//     return (
+//         <ButtonToolbar>
+//             <p variant="primary" onClick={() => setModalShow(true)}>
+//                 Copy
+//             </p>
+
+//             <MyVerticallyCenteredModal
+//                 show={modalShow}
+//                 onHide={() => setModalShow(false)}
+//                 saveItem={saveItem}
+
+//             />
+//         </ButtonToolbar>
+//     );
+// };
+
+// export const ModalRemove = ({ toggleModal, modalShow, deleteItem }) => {
+//     return (
+//         <ButtonToolbar>
+//             <p variant="primary" onClick={() => toggleModal()}>
+//                 Remove
+//             </p>
+
+//             <MyVerticallyCenteredModal
+//                 show={modalShow}
+//                 onHide={() => toggleModal()}
+//                 deleteItem={deleteItem}
+//             />
+//         </ButtonToolbar>
+//     );
+// };

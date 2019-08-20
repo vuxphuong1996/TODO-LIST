@@ -4,8 +4,20 @@ import { CustomToggle } from "./dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
-import { ModalTest } from "./modal";
+import { ModalEdit, ModalRemove } from "./modal";
 import DropdownTest from "./nav";
+
+const styleDiv = (item) => {
+    if (item.value === "Low") {
+        return { borderLeft: `3px solid orange` };
+    }
+    if (item.value === "Normal") {
+        return { borderLeft: `3px solid green` };
+    }
+    if (item.value === "Urgent") {
+        return { borderLeft: `3px solid red` };
+    }
+};
 
 export const RowItem = ({
     id,
@@ -13,7 +25,10 @@ export const RowItem = ({
     idName,
     dataBacklog,
     addItem,
-    saveItem
+    saveItem,
+    toggleModal,
+    modalShow,
+    deleteItem
 }) => {
     return (
         <Col>
@@ -27,7 +42,11 @@ export const RowItem = ({
 
                 <div className="backlog-list" id={idName}>
                     {dataBacklog.map((item) => (
-                        <Row className="listItem" key={item.id}>
+                        <Row
+                            className="listItem"
+                            key={item.id}
+                            style={styleDiv(item.color)}
+                        >
                             <Col md={12} className="listItem-top">
                                 <Row>
                                     <Col>
@@ -35,7 +54,7 @@ export const RowItem = ({
                                     </Col>
 
                                     <Col>
-                                        <DropdownTest />
+                                        <DropdownTest {...item} />
                                     </Col>
                                 </Row>
                             </Col>
@@ -60,26 +79,25 @@ export const RowItem = ({
                                             </Dropdown.Toggle>
 
                                             <Dropdown.Menu>
-                                                {item.method.map((it) => (
-                                                    <Dropdown.Item
-                                                        key={it.id}
-                                                        href={`#/action-${
-                                                            it.id
-                                                        }`}
-                                                    >
-                                                        <ModalTest
-                                                            name={it.name}
-                                                            saveItem={saveItem}
-                                                        />
-                                                    </Dropdown.Item>
-                                                ))}
-
-                                                {/* <Dropdown.Item href={`#/action-2`}>
-                                              <ModalTest name="Copy" />
-                                          </Dropdown.Item>
-                                          <Dropdown.Item href={`#/action-3`}>
-                                              <ModalTest name="Remove" />
-                                          </Dropdown.Item> */}
+                                                <Dropdown.Item href="#/action-0">
+                                                    <ModalEdit
+                                                        item={item}
+                                                        saveItem={saveItem}
+                                                        toggleModal={
+                                                            toggleModal
+                                                        }
+                                                        modalShow={modalShow}
+                                                        deleteItem={deleteItem}
+                                                    />
+                                                </Dropdown.Item>
+                                                {/* <Dropdown.Item href="#/action-1">
+                                                    <ModalCopy />
+                                                </Dropdown.Item> */}
+                                                {/* <Dropdown.Item href="#/action-1">
+                                                    <ModalRemove
+                                                        deleteItem={deleteItem}
+                                                    />
+                                                </Dropdown.Item> */}
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
