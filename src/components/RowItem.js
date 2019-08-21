@@ -1,68 +1,62 @@
-import React from "react";
+import React, { Component } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { CustomToggle } from "./dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
-import { ModalEdit, ModalRemove } from "./modal";
+import { ModalEdit } from "./modal";
 import DropdownTest from "./nav";
+import Sortable from 'react-sortablejs';
+// import { dataBacklogV2 } from "./../const/index";
+import uniqueId from 'lodash/uniqueId';
 
-const styleDiv = (item) => {
-    if (item.value === "Low") {
-        return { borderLeft: `3px solid orange` };
+class RowItem extends Component {
+    state = {
+        idCard: this.props.dataBacklog
     }
-    if (item.value === "Normal") {
-        return { borderLeft: `3px solid green` };
-    }
-    if (item.value === "Urgent") {
-        return { borderLeft: `3px solid red` };
-    }
-};
 
-export const RowItem = ({
-    id,
-    title,
-    idName,
-    dataBacklog,
-    AddItem,
-    saveItem,
-    deleteItem
-}) => {
-    return (
-        <Col>
-            <div className="backlog">
-                <div className="backlog-button">
-                    <span onClick={() => AddItem(id)}>
-                        <FontAwesomeIcon icon={faPlusCircle} />
-                    </span>{" "}
-                    {title}
-                </div>
+    styleDiv = (item) => {
+        if (item.value === "Low") {
+            return { borderLeft: `3px solid orange` };
+        }
+        if (item.value === "Normal") {
+            return { borderLeft: `3px solid green` };
+        }
+        if (item.value === "Urgent") {
+            return { borderLeft: `3px solid red` };
+        }
+    };
 
-                <div className="backlog-list" id={idName}>
-                    {dataBacklog.map((item) => (
-                        <Row
-                            className="listItem"
-                            key={item.id}
-                            style={styleDiv(item.color)}
-                        >
+    mappingData = () => {
+        const {saveItem, deleteItem } = this.props
+        const { idCard } = this.state
+        return this.props.dataNoName.map((item) => {
+            return idCard.map((val) => {                
+                if (item.id === val){
+                    return (<Row
+                                className="listItem"
+                                data-id={item.id}
+                                key={uniqueId()}
+                                style={this.styleDiv(item.color)}
+                            >
                             <Col md={12} className="listItem-top">
                                 <Row>
                                     <Col>
                                         <h6>{item.title}</h6>
                                     </Col>
-
+                    
                                     <Col>
                                         <DropdownTest {...item} />
                                     </Col>
                                 </Row>
                             </Col>
-
+            
                             <Col md={12} className="listItem-bottom">
                                 <Row>
                                     <Col>
                                         <span className="tag">Hards</span>
                                     </Col>
-
+                    
                                     <Col>
                                         <Dropdown className="positionDrop">
                                             <Dropdown.Toggle
@@ -75,7 +69,7 @@ export const RowItem = ({
                                                     />
                                                 </span>
                                             </Dropdown.Toggle>
-
+                    
                                             <Dropdown.Menu>
                                                 <Dropdown.Item
                                                     href={`#/action-${item.id}`}
@@ -86,23 +80,55 @@ export const RowItem = ({
                                                         deleteItem={deleteItem}
                                                     />
                                                 </Dropdown.Item>
-                                                {/* <Dropdown.Item href="#/action-1">
-                                                    <ModalCopy />
-                                                </Dropdown.Item> */}
-                                                {/* <Dropdown.Item href="#/action-1">
-                                                    <ModalRemove
-                                                        deleteItem={deleteItem}
-                                                    />
-                                                </Dropdown.Item> */}
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
                                 </Row>
                             </Col>
-                        </Row>
-                    ))}
-                </div>
+                        </Row>)
+                }else{return null;}
+            })
+        })
+        
+    }
+
+    render() {
+        const { id, title, AddItem } = this.props
+        return (
+            <div>
+                <Col>
+                    <div>
+                        <div className="backlog-button">
+                            <span onClick={() => AddItem(id)}>
+                                <FontAwesomeIcon icon={faPlusCircle} />
+                            </span>
+                            {title}
+                        </div>
+
+                        <div className="backlog-list" >
+                            <Sortable
+                                    options={{
+                                        animation: 150,
+                                        group: {
+                                            name: 'shared',
+                                            pull: true,
+                                            put: true
+                                        }
+                                    }}
+                                    className="block-list"
+                                    onChange={(items) => {
+                                        console.log('items', items.map(Number))
+                                        this.setState({ idCard: items.map(Number) });
+                                    }}
+                                >
+                                    {this.mappingData()}
+                            </Sortable>
+                        </div>
+                    </div>
+                </Col>
             </div>
-        </Col>
-    );
-};
+        );
+    }
+}
+
+export default RowItem;

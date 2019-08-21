@@ -1,35 +1,16 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import { RowItem } from "./components/RowItem";
-import { data } from "./const/index";
-import { Sortable, MultiDrag } from "sortablejs";
+import RowItem from "./components/RowItem";
+import { data, dataBacklogV2 } from "./const/index";
 import "./App.css";
 import uuidv1 from "uuid/v1";
 
-Sortable.mount(new MultiDrag());
-
 class App extends React.Component {
     state = {
-        data: data
+        data: data,
+        dataBacklog: dataBacklogV2
     };
-
-    componentDidMount() {
-        this.sortable("list01");
-        this.sortable("list02");
-        this.sortable("list03");
-        this.sortable("list04");
-    }
-
-    sortable = (list) => {
-        const el = document.getElementById(list);
-        new Sortable(el, {
-            group: "shared",
-            multiDrag: true,
-            selectedClass: "selected",
-            animation: 150
-        });
-    };
-
+   
     AddItem = (id) => {
         const { data } = this.state;
         data.forEach((item) => {
@@ -89,36 +70,35 @@ class App extends React.Component {
     };
 
     deleteItem = (id) => {
-        const { data } = this.state;
-        const dataItem = data.map((dtItem) => {
-            return {
-                ...dtItem,
-                dataBacklog: dtItem.dataBacklog.filter((dtItemChild) => {
-                    return dtItemChild.id !== id;
-                })
-            };
-        });
-        this.setState({
-            data: dataItem
-        });
+        const dataAfterDelete = this.state.dataBacklog.filter((dtItemChild) => {
+            return dtItemChild.id !== id;
+        })
+        this.setState({dataBacklog: dataAfterDelete});
     };
 
-    render() {
+    mappingItem = () => {
         const { data } = this.state;
-        console.log(data);
+        return data.map((item) => {
+            return <RowItem
+                        // {...item}
+                        id={item.id}
+                        title={item.title}
+                        dataBacklog={item.dataBacklog}
+                        dataNoName={this.state.dataBacklog}
+                        key={item.id}
+                        AddItem={this.AddItem}
+                        saveItem={this.saveItem}
+                        deleteItem={this.deleteItem}
+                    />
+        })
+    }
+
+    render() {
         return (
             <div className="App">
                 <Container>
                     <Row>
-                        {data.map((item) => (
-                            <RowItem
-                                {...item}
-                                key={item.id}
-                                AddItem={this.AddItem}
-                                saveItem={this.saveItem}
-                                deleteItem={this.deleteItem}
-                            />
-                        ))}
+                        {this.mappingItem()}
                     </Row>
                 </Container>
             </div>

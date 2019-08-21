@@ -145,9 +145,12 @@ export class MyVerticallyCenteredModal extends React.Component {
             assign,
             files
         } = this.props.item;
+        const {onHide, show} = this.props
+        console.log(this.props)
         return (
             <Modal
-                {...this.props}
+                onHide={onHide}
+                show={show}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -343,18 +346,3 @@ export const ModalEdit = ({ item, saveItem, deleteItem }) => {
     );
 };
 
-// export const ModalRemove = ({ toggleModal, modalShow, deleteItem }) => {
-//     return (
-//         <ButtonToolbar>
-//             <p variant="primary" onClick={() => toggleModal()}>
-//                 Remove
-//             </p>
-
-//             <MyVerticallyCenteredModal
-//                 show={modalShow}
-//                 onHide={() => toggleModal()}
-//                 deleteItem={deleteItem}
-//             />
-//         </ButtonToolbar>
-//     );
-// };
