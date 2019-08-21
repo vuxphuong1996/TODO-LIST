@@ -218,7 +218,7 @@ export const data = [
         id: uuidv1(),
         title: "Backlog",
         idName: "list01",
-        dataBacklog: [0, 1, 2]
+        dataBacklog: [2, 0, 1]
     },
     {
         id: uuidv1(),

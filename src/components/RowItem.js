@@ -30,8 +30,10 @@ class RowItem extends Component {
     mappingData = () => {
         const {saveItem, deleteItem } = this.props
         const { idCard } = this.state
-        return this.props.dataNoName.map((item) => {
-            return idCard.map((val) => {                
+        return idCard.map((val) => { 
+            return this.props.dataNoName.map((item) => {
+                console.log('item.id', item.id)
+                console.log('val', val)               
                 if (item.id === val){
                     return (<Row
                                 className="listItem"
@@ -95,7 +97,6 @@ class RowItem extends Component {
     render() {
         const { id, title, AddItem } = this.props
         return (
-            <div>
                 <Col>
                     <div>
                         <div className="backlog-button">
@@ -126,7 +127,6 @@ class RowItem extends Component {
                         </div>
                     </div>
                 </Col>
-            </div>
         );
     }
 }
