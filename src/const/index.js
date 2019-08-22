@@ -1,8 +1,9 @@
 import uuidv1 from "uuid/v1";
+const  [ n1, n2, n3, n4, n5, n6, n7, n8, n9, n10 ] = [ uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1(), uuidv1() ];
 
 export const dataBacklogV2 = [
     {
-        id: 1,
+        id: n1,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -23,7 +24,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 2,
+        id: n2,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -44,7 +45,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 3,
+        id: n3,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -65,7 +66,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 4,
+        id: n4,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -86,7 +87,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 5,
+        id: n5,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -107,7 +108,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 6,
+        id: n6,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -128,7 +129,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 7,
+        id: n7,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -149,7 +150,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 8,
+        id: n8,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -170,7 +171,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 9,
+        id: n9,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -191,7 +192,7 @@ export const dataBacklogV2 = [
         files: []
     },
     {
-        id: 0,
+        id: n10,
         title: "Webix Je t 2.0",
         tags: [{ value: "chocolate", label: "Chocolate" }],
         assign: {
@@ -218,25 +219,25 @@ export const data = [
         id: uuidv1(),
         title: "Backlog",
         idName: "list01",
-        dataBacklog: [2, 0, 1]
+        dataBacklog: [n2, n10, n1]
     },
     {
         id: uuidv1(),
         title: "In Progress",
         idName: "list02",
-        dataBacklog: [3, 4, 5]
+        dataBacklog: [n3, n4, n5]
     },
     {
         id: uuidv1(),
         title: "Testing",
         idName: "list03",
-        dataBacklog: [6, 7, 8]
+        dataBacklog: [n6, n7, n8]
     },
     {
         id: uuidv1(),
         title: "Done",
         idName: "list04",
-        dataBacklog: [9]
+        dataBacklog: [n9]
     }
 ];
 

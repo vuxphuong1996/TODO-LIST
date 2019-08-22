@@ -4,21 +4,20 @@ import RowItem from "./components/RowItem";
 import { data, dataBacklogV2 } from "./const/index";
 import "./App.css";
 import uuidv1 from "uuid/v1";
-
 class App extends React.Component {
     state = {
         data: data,
-        dataBacklog: dataBacklogV2
+        dataBacklog: dataBacklogV2,
     };
 
     addItem = (id) => {
-        const { data } = this.state;
-        data.forEach((item) => {
+        this.state.data.forEach((item) => {
             if (item.id === id) {
-                item.dataBacklog.push({
-                    id: uuidv1(),
-                    title: "Webix Je t 2.0",
-                    tags: { value: "chocolate", label: "Chocolate" },
+                var idRandom = uuidv1();
+                this.state.dataBacklog.push({
+                    id: idRandom,
+                    title: "Webix Je t 2.0 nnnnnn",
+                    tags: [{ value: "chocolate", label: "Chocolate" }],
                     assign: {
                         key: "Jenny Hess",
                         text: "Jenny Hess",
@@ -36,15 +35,15 @@ class App extends React.Component {
                     },
                     files: []
                 });
+                item.dataBacklog.push(idRandom)
             }
         });
         this.setState({
-            data: data
+            dataBacklog: this.state.dataBacklog
         });
     };
 
     saveItem = (userInfo) => {
-        console.log(userInfo);
         const { dataBacklog } = this.state;
         const dataItem = dataBacklog.map((dtItem) => {
             if (dtItem.id === userInfo.id) {
@@ -60,9 +59,8 @@ class App extends React.Component {
             }
             return dtItem;
         });
-        console.log(dataItem);
         this.setState({
-            data: dataItem
+            dataBacklog: dataItem
         });
     };
 
@@ -74,9 +72,7 @@ class App extends React.Component {
     };
 
     mappingItem = () => {
-        const { data } = this.state;
-        console.log(data);
-        return data.map((item) => {
+        return this.state.data.map((item) => {
             return (
                 <RowItem
                     // {...item}

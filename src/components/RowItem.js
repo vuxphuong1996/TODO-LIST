@@ -29,11 +29,8 @@ class RowItem extends Component {
 
     mappingData = () => {
         const {saveItem, deleteItem } = this.props
-        const { idCard } = this.state
-        return idCard.map((val) => { 
+        return this.state.idCard.map((val) => { 
             return this.props.dataNoName.map((item) => {
-                console.log('item.id', item.id)
-                console.log('val', val)               
                 if (item.id === val){
                     return (<Row
                                 className="listItem"
@@ -99,40 +96,33 @@ class RowItem extends Component {
     render() {
         const { id, title, addItem } = this.props;
         return (
-                <Col>
-                    <div>
-                        <div className="backlog-button">
-                            <span onClick={() => AddItem(id)}>
-                                <FontAwesomeIcon icon={faPlusCircle} />
-                            </span>
-                            {title}
-                        </div>
+            <Col>
+                <div className="backlog-button">
+                    <span onClick={() => addItem(id)}>
+                        <FontAwesomeIcon icon={faPlusCircle} />
+                    </span>
+                    {title}
+                </div>
 
-                    <div className="backlog-list">
-                        <Sortable
-                            options={{
-                                animation: 150,
-                                group: {
-                                    name: "shared",
-                                    pull: true,
-                                    put: true
-                                }
-                            }}
-                            className="block-list"
-                            onChange={(items) => {
-                                console.log("items", items.map(Number));
-                                this.setState({ idCard: items.map(Number) });
-                            }}
-                        >
-                            {this.mappingData()}
-                        </Sortable>
-                    </div>
-<<<<<<< HEAD
-                </Col>
-=======
+                <div className="backlog-list">
+                    <Sortable
+                        options={{
+                            animation: 150,
+                            group: {
+                                name: "shared",
+                                pull: true,
+                                put: true
+                            }
+                        }}
+                        className="block-list"
+                        onChange={(items) => {
+                            this.setState({ idCard: items });
+                        }}
+                    >
+                        {this.mappingData()}
+                    </Sortable>
                 </div>
             </Col>
->>>>>>> c7cc9bc26a0f55c40059675a339cda1f892fb3a9
         );
     }
 }
