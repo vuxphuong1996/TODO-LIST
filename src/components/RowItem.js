@@ -4,7 +4,7 @@ import { CustomToggle } from "./dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
-import { ModalEdit } from "./modal";
+import { ModalEdit, ModalRemove } from "./modal";
 import DropdownTest from "./nav";
 import Sortable from "react-sortablejs";
 // import { dataBacklogV2 } from "./../const/index";
@@ -28,16 +28,31 @@ class RowItem extends Component {
     };
 
     mappingData = () => {
-        const {saveItem, deleteItem } = this.props
-        return this.state.idCard.map((val) => { 
+        const { saveItem, deleteItem, saveItemOutSide } = this.props;
+        return this.state.idCard.map((val) => {
             return this.props.dataNoName.map((item) => {
-                if (item.id === val){
-                    return (<Row
-                                className="listItem"
-                                data-id={item.id}
-                                key={uniqueId()}
-                                style={this.styleDiv(item.color)}
-                            >
+                if (item.id === val) {
+                    return (
+                        <Row
+                            className="listItem"
+                            data-id={item.id}
+                            key={uniqueId()}
+                            style={this.styleDiv(item.color)}
+                        >
+                            {item.files.length > 0 ? (
+                                <Col md={12} className="listItem-top">
+                                    <img
+                                        src={`/images/${item.files[0].name}`}
+                                        style={{
+                                            height: "130px",
+                                            width: "100%"
+                                        }}
+                                        alt=""
+                                    />
+                                </Col>
+                            ) : (
+                                ""
+                            )}
                             <Col md={12} className="listItem-top">
                                 <Row>
                                     <Col>
@@ -45,7 +60,10 @@ class RowItem extends Component {
                                     </Col>
 
                                     <Col>
-                                        <DropdownTest {...item} />
+                                        <DropdownTest
+                                            {...item}
+                                            saveItemOutSide={saveItemOutSide}
+                                        />
                                     </Col>
                                 </Row>
                             </Col>
@@ -53,7 +71,16 @@ class RowItem extends Component {
                             <Col md={12} className="listItem-bottom">
                                 <Row>
                                     <Col>
-                                        <span className="tag">Hards</span>
+                                        {item.tags.map((it, index) => {
+                                            return (
+                                                <span
+                                                    className="tag"
+                                                    key={index}
+                                                >
+                                                    {it.value}
+                                                </span>
+                                            );
+                                        })}
                                     </Col>
 
                                     <Col>
@@ -76,6 +103,14 @@ class RowItem extends Component {
                                                     <ModalEdit
                                                         item={item}
                                                         saveItem={saveItem}
+                                                        deleteItem={deleteItem}
+                                                    />
+                                                </Dropdown.Item>
+                                                <Dropdown.Item
+                                                    href={`#/action-${item.id}`}
+                                                >
+                                                    <ModalRemove
+                                                        item={item}
                                                         deleteItem={deleteItem}
                                                     />
                                                 </Dropdown.Item>

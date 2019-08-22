@@ -6,6 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import Select from "react-select";
 
+const styleDiv = {
+    position: "absolute",
+    left: "15px"
+};
+
 const options = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
@@ -83,6 +88,14 @@ export class MyVerticallyCenteredModal extends React.Component {
             files: [],
             selectedOption: ""
         };
+    }
+
+    componentDidMount() {
+        if (this.props.item.files) {
+            this.setState({
+                files: this.props.item.files
+            });
+        }
     }
 
     onFilesChange = (files) => {
@@ -175,7 +188,6 @@ export class MyVerticallyCenteredModal extends React.Component {
                                 placeholder="Enter title"
                                 ref={(node) => (this.title = node)}
                                 defaultValue={title}
-                                // onChange={this.handldeChange()}
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -194,7 +206,6 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         Assign To
                                     </Form.Label>
                                     <Dropdown
-                                        placeholder="State"
                                         search
                                         selection
                                         options={stateAssign}
@@ -345,6 +356,52 @@ export const ModalEdit = ({ item, saveItem, deleteItem }) => {
                 show={modalShow}
                 onHide={handleClose}
                 saveItem={saveItem}
+                item={item}
+                deleteItem={deleteItem}
+            />
+        </ButtonToolbar>
+    );
+};
+
+class MyModalRemove extends React.Component {
+    render() {
+        const { onHide, show, item, deleteItem } = this.props;
+        return (
+            <Modal
+                onHide={onHide}
+                show={show}
+                size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton />
+                <Modal.Body>
+                    <p>The card will be deleted permanently, are you sure?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button style={styleDiv} onClick={this.props.onHide}>
+                        Cancel
+                    </Button>
+                    <Button onClick={() => deleteItem(item.id)}>Ok</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+}
+
+export const ModalRemove = ({ item, deleteItem }) => {
+    const [modalShow, setModalShow] = React.useState(false);
+    const handleClose = () => setModalShow(false);
+    const handleShow = () => setModalShow(true);
+    return (
+        <ButtonToolbar>
+            <p variant="primary" onClick={handleShow}>
+                Remove
+            </p>
+
+            <MyModalRemove
+                show={modalShow}
+                onHide={handleClose}
                 item={item}
                 deleteItem={deleteItem}
             />

@@ -6,6 +6,10 @@
     margin-right: 10px;
 }
 
+.block-list {
+    height: 600px;
+}
+
 .listItem {
     border: 1px solid #4444;
     background: #f4f5f9;

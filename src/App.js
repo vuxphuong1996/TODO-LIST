@@ -4,10 +4,11 @@ import RowItem from "./components/RowItem";
 import { data, dataBacklogV2 } from "./const/index";
 import "./App.css";
 import uuidv1 from "uuid/v1";
+
 class App extends React.Component {
     state = {
         data: data,
-        dataBacklog: dataBacklogV2,
+        dataBacklog: dataBacklogV2
     };
 
     addItem = (id) => {
@@ -35,7 +36,7 @@ class App extends React.Component {
                     },
                     files: []
                 });
-                item.dataBacklog.push(idRandom)
+                item.dataBacklog.push(idRandom);
             }
         });
         this.setState({
@@ -55,6 +56,22 @@ class App extends React.Component {
                     color: userInfo.color,
                     status: userInfo.status,
                     files: userInfo.files
+                };
+            }
+            return dtItem;
+        });
+        this.setState({
+            dataBacklog: dataItem
+        });
+    };
+
+    saveItemOutSide = (id, valueAssign) => {
+        const { dataBacklog } = this.state;
+        const dataItem = dataBacklog.map((dtItem) => {
+            if (dtItem.id === id) {
+                return {
+                    ...dtItem,
+                    assign: valueAssign
                 };
             }
             return dtItem;
@@ -84,6 +101,7 @@ class App extends React.Component {
                     addItem={this.addItem}
                     saveItem={this.saveItem}
                     deleteItem={this.deleteItem}
+                    saveItemOutSide={this.saveItemOutSide}
                 />
             );
         });
