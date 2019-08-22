@@ -5,81 +5,12 @@ import Files from "react-files";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import Select from "react-select";
+import * as type from "../const/options";
 
 const styleDiv = {
     position: "absolute",
     left: "15px"
 };
-
-const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" }
-];
-
-const stateAssign = [
-    {
-        key: "Jenny Hess",
-        text: "Jenny Hess",
-        value: "Jenny Hess"
-    },
-    {
-        key: "Elliot Fu",
-        text: "Elliot Fu",
-        value: "Elliot Fu"
-    },
-    {
-        key: "Stevie Feliciano",
-        text: "Stevie Feliciano",
-        value: "Stevie Feliciano"
-    },
-    {
-        key: "Christian",
-        text: "Christian",
-        value: "Christian"
-    }
-];
-
-const stateColors = [
-    {
-        key: "Normal",
-        text: "Normal",
-        value: "Normal"
-    },
-    {
-        key: "Low",
-        text: "Low",
-        value: "Low"
-    },
-    {
-        key: "Urgent",
-        text: "Urgent",
-        value: "Urgent"
-    }
-];
-
-const stateStatus = [
-    {
-        key: "New",
-        text: "New",
-        value: "New"
-    },
-    {
-        key: "Work",
-        text: "Work",
-        value: "Work"
-    },
-    {
-        key: "Test",
-        text: "Test",
-        value: "Test"
-    },
-    {
-        key: "Done",
-        text: "Done",
-        value: "Done"
-    }
-];
 
 export class MyVerticallyCenteredModal extends React.Component {
     constructor(props) {
@@ -193,7 +124,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Tags</Form.Label>
                             <Select
-                                options={options}
+                                options={type.options}
                                 isMulti
                                 onChange={this.handleChange}
                                 defaultValue={tags}
@@ -208,7 +139,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                     <Dropdown
                                         search
                                         selection
-                                        options={stateAssign}
+                                        options={type.stateAssign}
                                         defaultValue={assign.value}
                                         ref={(node) => (this.assignto = node)}
                                     />
@@ -222,7 +153,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         placeholder="State"
                                         search
                                         selection
-                                        options={stateColors}
+                                        options={type.stateColors}
                                         defaultValue={color.value}
                                         ref={(node) => (this.color = node)}
                                     />
@@ -236,7 +167,7 @@ export class MyVerticallyCenteredModal extends React.Component {
                                         placeholder="State"
                                         search
                                         selection
-                                        options={stateStatus}
+                                        options={type.stateStatus}
                                         defaultValue={status.value}
                                         ref={(node) => (this.status = node)}
                                     />

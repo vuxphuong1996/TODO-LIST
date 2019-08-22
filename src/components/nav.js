@@ -1,28 +1,6 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
-
-const stateAssign = [
-    {
-        key: "Jenny Hess",
-        text: "Jenny Hess",
-        value: "Jenny Hess"
-    },
-    {
-        key: "Elliot Fu",
-        text: "Elliot Fu",
-        value: "Elliot Fu"
-    },
-    {
-        key: "Stevie Feliciano",
-        text: "Stevie Feliciano",
-        value: "Stevie Feliciano"
-    },
-    {
-        key: "Christian",
-        text: "Christian",
-        value: "Christian"
-    }
-];
+import * as type from "../const/options";
 
 class DropdownTest extends React.Component {
     state = {
@@ -45,7 +23,7 @@ class DropdownTest extends React.Component {
                 <Dropdown
                     className="positionDrop"
                     inline
-                    options={stateAssign}
+                    options={type.stateAssign}
                     defaultValue={value}
                     onChange={this.handleChange}
                 />
